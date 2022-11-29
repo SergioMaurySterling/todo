@@ -1,5 +1,13 @@
+//routing
 const express = require('express');
+const router = express.Router();
+//middlewares
+const validator_handler = require('../middlewares/validator.handler');
+const check_api_key = require('../middlewares/auth.handler')
+//services
 const user_service = require('../services/user.service');
+const service = new user_service();
+//schemas
 const {
   create_user,
   // update_user,
@@ -7,12 +15,10 @@ const {
   // get_user,
   // login_user
 } = require('../schemas/user.schema');
-const validator_handler = require('../middlewares/validator.handler');
 
-const router = express.Router();
-const service = new user_service();
-
+//routes
 router.post('/',
+  check_api_key,
   validator_handler(create_user, 'body'),
   async (req, res) => {
     try {
