@@ -7,7 +7,7 @@ const create_user = Joi.object({
     minDomainSegments: 2,
     tlds: { allow: ['com', 'net', 'co', 'es'] }
   }),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+  password: Joi.string().min(8)
 })
 
 const update_user = Joi.object({
@@ -17,7 +17,7 @@ const update_user = Joi.object({
     minDomainSegments: 2,
     tlds: { allow: ['com', 'net', 'co', 'es'] }
   }),
-  password: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
+  password: Joi.string().min(8)
 })
 
 const delete_user = Joi.object({
